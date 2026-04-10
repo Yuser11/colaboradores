@@ -8,9 +8,9 @@ routers.use(express.json());
 routers.get('/', controllerColaboradores.raiz)
 routers.post('/cadastrar', controllerColaboradores.cadastrar)
 routers.get('/listar', controllerColaboradores.listar)
-routers.get('/listar/id=:id', controllerColaboradores.listarPorID)
+routers.get('/listar/:id', controllerColaboradores.listarPorID)
 routers.post('/login', controllerColaboradores.login)
-routers.delete('/deletar', controllerColaboradores.deletarPorID)
+routers.delete('/deletar/:id', controllerColaboradores.deletarPorID)
 
 
 export default routers

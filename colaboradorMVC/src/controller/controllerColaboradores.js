@@ -63,7 +63,7 @@ const controllerColaboradores = {
           else{
           res
             .status(200)
-            .json({ msg: "login efetuado", id : login });
+            .json({ msg: "login efetuado", login });
 
         }
       }
@@ -92,8 +92,8 @@ const controllerColaboradores = {
     }
   },
   deletarPorID: async (req, res) => {
-    console.log(req.body);
-    const { id } = req.body;
+    console.log(req.params.id);
+    const id = req.params.id;
     console.log(id);
     const resultado = await modelColaboradores.deletarPorID(id);
     console.log(resultado.affectedRows);
