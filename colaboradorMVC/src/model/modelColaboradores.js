@@ -10,7 +10,6 @@ const modelColaboradores = {
         "INSERT INTO colaboradores(NOME, EMAIL, IDADE, TELEFONE, CIDADE, ESTADO, SENHA) VALUES(?,?,?,?,?,?,?)",
         [nome, email, idade, telefone, cidade, estado, senhaHash],
       );
-      console.log(resultado);
       return resultado;
     } catch (error) {
       throw error;
@@ -39,19 +38,14 @@ const modelColaboradores = {
   },
   login: async (email, senha) => {
     try {
-      console.log(email, senha);
-      console.log("SELECT ID, NOME, EMAIL, IDADE, TELEFONE, CIDADE, ESTADO, SENHA FROM COLABORADORES WHERE EMAIL = ?", email);
       const [resultado] = await conexao.query(
         "SELECT ID, NOME, EMAIL, IDADE, TELEFONE, CIDADE, ESTADO, SENHA FROM COLABORADORES WHERE EMAIL = ?",
         email,
       );
-      console.log(resultado);
-      console.log(resultado[0]);
       if (!resultado[0]) {
         return false;
       } else {
         const senhaValidada = await bcrypt.compare(senha, resultado[0].SENHA);
-        console.log(senhaValidada);
         if (senhaValidada) {
           return resultado[0];
         } else {
@@ -63,7 +57,6 @@ const modelColaboradores = {
     }
   },
   deletarPorID: async (id) => {
-    console.log("DELETE FROM COLABORADORES WHERE id =?", id);
     try {
       const resultado = await conexao.query(
         "DELETE FROM COLABORADORES WHERE id =?", id,
@@ -74,13 +67,11 @@ const modelColaboradores = {
     }
   },
   buscarEmail: async (email) => {
-    console.log("SELECT EMAIL FROM colaboradores WHERE EMAIL=?", email);
     try {
       const [resultado] = await conexao.query(
         "SELECT EMAIL FROM colaboradores WHERE EMAIL=?",
         email,
       );
-      console.log(resultado[0]);
       if (!resultado[0]) {
         return false;
       } else {
